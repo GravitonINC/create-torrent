@@ -4,7 +4,7 @@ const path = require('path')
 const sha1 = require('simple-sha1')
 const test = require('tape')
 const createTorrent = require('..')
-const url = "https://universeapp-assets-dev.s3.amazonaws.com/e01e5df8a353e7cf96d9c9663be0290e34dc7d75c6770cb3.jpg" // File to download
+const url = "http://universeapp-assets-dev.s3.amazonaws.com/e01e5df8a353e7cf96d9c9663be0290e34dc7d75c6770cb3.jpg" // File to download
 const filename = "e01e5df8a353e7cf96d9c9663be0290e34dc7d75c6770cb3.jpg"
 const dest = "./" + filename // Download destination
 const announce = ["wss://bttracker.graviton.xyz/announce", "wss://tracker.openwebtorrent.com"] // Custom Torrent Tracker
@@ -26,11 +26,11 @@ const opts = {
   // onProgress: Function               // called with the number of bytes hashed and estimated total size after every piece
 }
 
-const https = require('https'); // or 'http' for http:// URLs
+const http = require('http'); // or 'http' for http:// URLs
 const fs = require('fs');
 
 const file = fs.createWriteStream(dest);
-https.get(url, async function (response) {
+http.get(url, async function (response) {
   await response.pipe(file);
   response.on("error", (err) => {
     console.log("Error downloading file: " + url);
